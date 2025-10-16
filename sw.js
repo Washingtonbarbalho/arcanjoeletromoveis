@@ -1,4 +1,4 @@
-const CACHE_NAME = 'carne-arcanjo-v2'; // Versão do cache atualizada
+const CACHE_NAME = 'carne-arcanjo-v3'; // Versão do cache atualizada
 // Lista de arquivos e recursos para fazer cache com caminhos relativos
 const urlsToCache = [
     '.',
@@ -25,6 +25,16 @@ self.addEventListener('install', event => {
 
 // Evento de fetch: responde com o cache se disponível, senão busca na rede
 self.addEventListener('fetch', event => {
+    const requestUrl = new URL(event.request.url);
+
+    // Se a requisição for para a API do Firebase, vá direto para a rede.
+    // Isso impede que os dados dinâmicos sejam bloqueados pelo cache.
+    if (requestUrl.hostname === 'firestore.googleapis.com') {
+        event.respondWith(fetch(event.request));
+        return;
+    }
+
+    // Para todas as outras requisições (arquivos do app), use a estratégia cache-first.
     event.respondWith(
         caches.match(event.request)
             .then(response => {
@@ -37,6 +47,7 @@ self.addEventListener('fetch', event => {
             })
     );
 });
+
 
 // Evento de ativação: limpa caches antigos
 self.addEventListener('activate', event => {
