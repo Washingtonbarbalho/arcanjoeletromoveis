@@ -1,11 +1,18 @@
-const CACHE_NAME = 'carne-arcanjo-v1';
-// Lista de arquivos e recursos para fazer cache
+// CORREÇÃO: A versão do cache foi incrementada para forçar a atualização do Service Worker.
+const CACHE_NAME = 'carne-arcanjo-v2';
+
+// CORREÇÃO: Os caminhos dos arquivos foram alterados para relativos (iniciando com './')
+// para funcionar corretamente no ambiente do GitHub Pages.
+// Também adicionei o manifest.json e os ícones à lista de cache.
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/css/style.css',
-    '/js/app.js',
-    '/js/firebase-config.js',
+    '.',
+    './index.html',
+    './manifest.json',
+    './css/style.css',
+    './js/app.js',
+    './js/firebase-config.js',
+    './images/icon-192x192.png',
+    './images/icon-512x512.png',
     'https://cdn.tailwindcss.com',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2'
