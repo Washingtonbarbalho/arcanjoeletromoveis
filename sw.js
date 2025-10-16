@@ -1,11 +1,12 @@
-const CACHE_NAME = 'carne-arcanjo-v1';
-// Lista de arquivos e recursos para fazer cache
+const CACHE_NAME = 'carne-arcanjo-v2'; // Versão do cache atualizada
+// Lista de arquivos e recursos para fazer cache com caminhos relativos
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/css/style.css',
-    '/js/app.js',
-    '/js/firebase-config.js',
+    '.',
+    'index.html',
+    'css/style.css',
+    'js/app.js',
+    'js/firebase-config.js',
+    'manifest.json',
     'https://cdn.tailwindcss.com',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2'
@@ -52,3 +53,4 @@ self.addEventListener('activate', event => {
         })
     );
 });
+
