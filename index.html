@@ -230,7 +230,9 @@
         // Registra o Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                // CORREÇÃO: O caminho para o service worker foi alterado para relativo ('./sw.js')
+                // Isso garante que ele seja encontrado corretamente no subdiretório do GitHub Pages.
+                navigator.serviceWorker.register('./sw.js')
                     .then(registration => {
                         console.log('Service Worker registrado com sucesso:', registration);
                     })
