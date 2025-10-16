@@ -1,12 +1,11 @@
-const CACHE_NAME = 'carne-arcanjo-v3'; // Versão do cache atualizada
-// Lista de arquivos e recursos para fazer cache com caminhos relativos
+const CACHE_NAME = 'carne-arcanjo-v1';
+// Lista de arquivos e recursos para fazer cache
 const urlsToCache = [
-    '.',
-    'index.html',
-    'css/style.css',
-    'js/app.js',
-    'js/firebase-config.js',
-    'manifest.json',
+    '/',
+    '/index.html',
+    '/css/style.css',
+    '/js/app.js',
+    '/js/firebase-config.js',
     'https://cdn.tailwindcss.com',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2'
@@ -25,16 +24,6 @@ self.addEventListener('install', event => {
 
 // Evento de fetch: responde com o cache se disponível, senão busca na rede
 self.addEventListener('fetch', event => {
-    const requestUrl = new URL(event.request.url);
-
-    // Se a requisição for para a API do Firebase, vá direto para a rede.
-    // Isso impede que os dados dinâmicos sejam bloqueados pelo cache.
-    if (requestUrl.hostname === 'firestore.googleapis.com') {
-        event.respondWith(fetch(event.request));
-        return;
-    }
-
-    // Para todas as outras requisições (arquivos do app), use a estratégia cache-first.
     event.respondWith(
         caches.match(event.request)
             .then(response => {
@@ -47,7 +36,6 @@ self.addEventListener('fetch', event => {
             })
     );
 });
-
 
 // Evento de ativação: limpa caches antigos
 self.addEventListener('activate', event => {
@@ -64,4 +52,3 @@ self.addEventListener('activate', event => {
         })
     );
 });
-
